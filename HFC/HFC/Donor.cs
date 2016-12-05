@@ -23,7 +23,7 @@ namespace HFC
         {
             DonorID = "-1";
             FavoriteFoodBank = null;
-            Email = "Unregitered User No Email On File";
+            Email = "Unregistered User No Email On File";
         }
     }
 }
