@@ -129,31 +129,6 @@ namespace HFC
 
             IsBusy = false;
         }
-
-        public async Task<Position> GetPosition()
-        {
-            //requestSingleUpdate
-
-            IsBusy = true;
-
-            Position p;
-
-            // If we have a location provider.
-            if (!String.IsNullOrEmpty(Droid.MainActivity.locationProvider_name))
-            {
-                Droid.MainActivity.has_location = false;
-                Droid.MainActivity.locationManager.RequestSingleUpdate(Droid.MainActivity.locationProvider_name, Droid.MainActivity.this);
-
-                while (Droid.MainActivity.has_location == false)
-                {
-                    await Task.Delay(500);
-                }
-
-                IsBusy = false;
-            }
-
-            return p;
-        }
     }
 
     public static class MessageKeys

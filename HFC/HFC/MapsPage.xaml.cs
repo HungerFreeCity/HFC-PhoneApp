@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -10,11 +11,11 @@ namespace HFC
     public partial class MapsPage : ContentPage
     {
         protected MapsViewModel ViewModel => BindingContext as MapsViewModel;
-        AppState currState;
+        ObservableCollection<FoodBank> FoodBankList;
 
-        public MapsPage(AppState p_currState)
+        public MapsPage(ObservableCollection<FoodBank> p_FoodBankList)
         {
-            currState = p_currState;
+            FoodBankList = p_FoodBankList;
 
             InitializeComponent();
         }
@@ -40,7 +41,7 @@ namespace HFC
 
             try
             {
-                position = await ViewModel.GetPosition();
+                position = LocationServicesHelper.getLocationUpdate();
             }
             catch (Exception ex)
             {
@@ -51,16 +52,16 @@ namespace HFC
 
             CenterMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(10)));
 
-            CenterMap.CustomPins = new List<Droid.CustomPin> { };
+            CenterMap.CustomPins = new List<CustomPin> { };
             CenterMap.Pins.Clear();
 
             // Xamarin.Forms.Maps (2.3.107) currently has a bug that causes map pins to throw ExecutionEngineExceptions on UWP.
             // Omitting pins on UWP for now.
             if (Device.OS != TargetPlatform.WinPhone && Device.OS != TargetPlatform.Windows)
             {
-                foreach(FoodBank fb in currState.FoodBankList)
+                foreach(FoodBank fb in FoodBankList)
                 {
-                    var pin = new Droid.CustomPin()
+                    var pin = new CustomPin()
                     {
                         Pin = new Pin
                         {

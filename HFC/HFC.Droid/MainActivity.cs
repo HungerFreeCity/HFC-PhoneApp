@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 
 using Android.App;
@@ -9,6 +10,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Locations;
+
+using Xamarin.Forms.Maps;
 
 namespace HFC.Droid
 {
@@ -44,14 +47,34 @@ namespace HFC.Droid
                 locationProvider_name = string.Empty;
             }
 
+            LocationServicesHelper.getLocationUpdate = GetSingleLocationUpdate;
+
             LoadApplication(new App());
+        }
+
+        public Position GetSingleLocationUpdate()
+        {
+            // If we have a location provider.
+            if (!String.IsNullOrEmpty(locationProvider_name))
+            {
+                LocationServicesHelper.has_location = false;
+                locationManager.RequestSingleUpdate(locationProvider_name, this, null);
+
+                while (LocationServicesHelper.has_location == false)
+                {
+                    Task.Delay(500);
+                }
+            }
+            
+            return new Position(LocationServicesHelper.last_location_lat, LocationServicesHelper.last_location_long);
         }
 
 
         public void OnLocationChanged(Location location)
         {
-            last_location = location;
-            has_location = true;
+            LocationServicesHelper.last_location_lat = location.Latitude;
+            LocationServicesHelper.last_location_long = location.Longitude;
+            LocationServicesHelper.has_location = true;
         }
 
         public void OnStatusChanged(String provider, int status, Bundle extras) { }
@@ -63,8 +86,7 @@ namespace HFC.Droid
         public void OnStatusChanged(string provider, Availability status, Bundle extras) { }
 
         public static LocationManager locationManager;
-
-        LocationServicesHelper.getLocationUpdate
+        public static string locationProvider_name;
     }
 }
 
