@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HFC;assembly=HFC"
+             x:Class="HFC.Login" Title="Login"
+             BackgroundImage="jacksonville_skyline">
+  <ContentPage.Content>
+    <StackLayout>
+      <Label Text="Hunger Free City"
+             TextColor="White"
+             VerticalOptions="End"
+             HorizontalOptions="Center"
+             FontSize="45"
+             FontAttributes="Bold"/>
+      <Image Source="hfc_thumbnail.png"
+             VerticalOptions="Center"
+             HorizontalOptions="Center"/>
+      <Button Text="Login with Google"
+              VerticalOptions="Start"
+              HorizontalOptions="CenterAndExpand"
+              IsVisible="False"/>
+      <Button x:Name="contworeg"
+              Text="Continue Without Login"
+              VerticalOptions="Start"
+              HorizontalOptions="CenterAndExpand"/>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>

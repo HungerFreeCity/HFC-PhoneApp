@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:HFC;assembly=HFC"
+             x:Class="HFC.NeedsList"
+             Title="Needs List"
+             BackgroundColor="#1976D2">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="listTemplate">
+        <ViewCell>
+          <StackLayout Orientation="Horizontal">
+            <Button Text="Donate" TextColor="Black"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"/>
+            <StackLayout Orientation="Vertical">
+              <Label Text="{Binding Name}"
+                     VerticalOptions="Center"
+                     HorizontalOptions="StartAndExpand"
+                     TextColor="Black"
+                     FontSize="Large"/>
+              <Label Text="{Binding Unit}"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Start"
+                     TextColor="Black"
+                     FontSize="Small"/>
+            </StackLayout>
+          </StackLayout>
+        </ViewCell>
+      </DataTemplate>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ContentPage.Content>
+    <StackLayout>
+      <Label x:Name="ListTitle1"
+             TextColor="Black"
+             FontSize="Large"
+             HorizontalOptions="CenterAndExpand"
+             VerticalOptions="Start"/>
+      <ListView x:Name="firstList"
+                VerticalOptions="StartAndExpand"
+                RowHeight="60"
+                BackgroundColor="White"
+                ItemTemplate="{StaticResource listTemplate}"/>
+      <Label x:Name="ListTitle2"
+             TextColor="Black"
+             FontSize="Large"
+             HorizontalOptions="CenterAndExpand"
+             VerticalOptions="Start"/>
+      <ListView x:Name="secondList"
+                VerticalOptions="EndAndExpand"
+                RowHeight="60"
+                BackgroundColor="White"
+                ItemTemplate="{StaticResource listTemplate}"/>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>

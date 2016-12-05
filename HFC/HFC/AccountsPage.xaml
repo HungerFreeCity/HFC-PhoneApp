@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HFC.AccountsPage"
+             xmlns:local="clr-namespace:HFC;assembly=HFC"
+             Title="My Account">
+  <ContentPage.Content>
+    <StackLayout Orientation="Vertical">
+      <Label HorizontalTextAlignment="Center"
+             HorizontalOptions ="Center"
+             VerticalTextAlignment ="End"
+             VerticalOptions="Center"
+             Text="Email Address"
+             TextColor="Black"
+             FontAttributes="Bold"
+             FontSize="Large"/>
+      <Label x:Name="EmailLabel"
+             HorizontalTextAlignment="Start"
+             VerticalTextAlignment ="Start"
+             HorizontalOptions ="Start"
+             VerticalOptions="StartAndExpand"
+             TextColor="Black"
+             FontSize="Large"/>
+      <Label x:Name="FavFoodbankLabel"
+             HorizontalTextAlignment="Start"
+             VerticalTextAlignment ="Start"
+             HorizontalOptions ="CenterAndExpand"
+             VerticalOptions="Center"
+             Text ="Favorite FoodBank"
+             TextColor="Black"
+             FontAttributes="Bold"
+             FontSize="Large"/>
+      <Label x:Name="FoodbankNameLabel"
+             HorizontalTextAlignment="Start"
+             VerticalTextAlignment ="Start"
+             HorizontalOptions ="StartAndExpand"
+             VerticalOptions="Start"
+             TextColor="Black"
+             FontSize="Large"/>
+      <Label x:Name="FoodbankWebsiteLabel"
+             HorizontalTextAlignment="Start"
+             VerticalTextAlignment ="Start"
+             HorizontalOptions ="StartAndExpand"
+             VerticalOptions="StartAndExpand"
+             TextColor="Blue"
+             FontAttributes="Italic"
+             FontSize="Large"/>
+      <Button x:Name="Logout"
+              HorizontalOptions="CenterAndExpand"
+              VerticalOptions="End"
+              Text="Click to Logout"
+              TextColor="Black"/>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>
