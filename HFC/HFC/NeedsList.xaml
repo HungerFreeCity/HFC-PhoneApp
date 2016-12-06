@@ -45,10 +45,10 @@
       <Label x:Name="ListTitle2"
              TextColor="Black"
              FontSize="Large"
-             HorizontalOptions="CenterAndExpand"
+             HorizontalOptions="Start"
              VerticalOptions="Start"/>
       <ListView x:Name="secondList"
-                VerticalOptions="EndAndExpand"
+                VerticalOptions="StartAndExpand"
                 RowHeight="60"
                 BackgroundColor="White"
                 ItemTemplate="{StaticResource listTemplate}"/>

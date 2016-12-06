@@ -15,14 +15,14 @@ namespace HFC
         public string Location { get; set; }
         public string FoodBankName { get; set; }
         public string Website { get; set; }
-        public ObservableCollection<Need> NeedsList { get; set; }
+        public List<Need> NeedsList { get; set; }
 
         public FoodBank()
         {
             FoodBankID = "";
             Location = "";
             Website = "";
-            NeedsList = new ObservableCollection<Need>();
+            NeedsList = new List<Need>();
         }
 
         public void spoof()

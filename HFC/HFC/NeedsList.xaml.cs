@@ -10,21 +10,32 @@ namespace HFC
 {
     public partial class NeedsList : ContentPage
     {
-        public NeedsList(FoodBank FirstFoodBank, FoodBank SecondFoodBank)
+        FoodBank FirstFoodBank;
+        FoodBank SecondFoodBank;
+        public NeedsList(AppState curr)
         {
-            var temp = FirstFoodBank.NeedsList[0].Name;
-            temp = FirstFoodBank.NeedsList[0].Unit;
-            temp = FirstFoodBank.NeedsList[0].NeedID;
-            temp = null;
             InitializeComponent();
-            ListTitle1.Text = FirstFoodBank.FoodBankName;
-            firstList.ItemsSource = FirstFoodBank.NeedsList;
-            secondList.ItemsSource = SecondFoodBank.NeedsList;
-            ListTitle2.Text = SecondFoodBank.FoodBankName;
-        }
-        public void onClicked()
-        {
 
+            if (curr.FoodBankList.Count != 0)
+            {
+                FirstFoodBank = curr.FoodBankList[0];
+                SecondFoodBank = curr.FoodBankList[1];
+                var temp = FirstFoodBank.NeedsList[0].Name;
+                temp = FirstFoodBank.NeedsList[0].Unit;
+                temp = FirstFoodBank.NeedsList[0].NeedID;
+                temp = null;
+                ListTitle1.Text = FirstFoodBank.FoodBankName;
+                firstList.ItemsSource = FirstFoodBank.NeedsList;
+                secondList.ItemsSource = SecondFoodBank.NeedsList;
+                ListTitle2.Text = SecondFoodBank.FoodBankName;
+
+            }
+
+            else
+            {
+                curr.spoofFoodBankList();
+
+            }
         }
     }
 }

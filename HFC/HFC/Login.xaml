@@ -8,12 +8,12 @@
     <StackLayout>
       <Label Text="Hunger Free City"
              TextColor="White"
-             VerticalOptions="End"
+             VerticalOptions="Start"
              HorizontalOptions="Center"
              FontSize="45"
              FontAttributes="Bold"/>
-      <Image Source="hfc_thumbnail.png"
-             VerticalOptions="Center"
+      <Image Source="icon.png"
+             VerticalOptions="CenterAndExpand"
              HorizontalOptions="Center"/>
       <Button Text="Login with Google"
               VerticalOptions="Start"
