@@ -106,68 +106,81 @@ namespace HFC
             Application.Current.Properties["LoggedIn"] = "0";
             Application.Current.Properties["User"] = "0";
             Application.Current.SavePropertiesAsync();
+            currState = new AppState(this);
             MainPage = new LoginModalPage(this);
         }
 
         public async Task getFoodBanks(string Latitude, string Longtitude)
         {
             HttpClient client = new HttpClient();
-            string RestUrl = "http://hfcrest.azurewebsites.net/api/Foodbanks/?Longtitude={0}&Latitude={1}";
-            var uri = new Uri(string.Format(RestUrl, Longtitude, Latitude));
-
-            HttpResponseMessage response = await client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                this.currState.FoodBankList = JsonConvert.DeserializeObject<List<FoodBank>>(content);
-                foreach(FoodBank Foodbankf in currState.FoodBankList)
-                {
+                string RestUrl = "http://hfcserver.azurewebsites.net/api/FoodBanks?Longtitude={0}&Latitude={1}";
+                var uri = new Uri(string.Format(RestUrl, Longtitude, Latitude));
 
+                HttpResponseMessage response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    this.currState.FoodBankList = JsonConvert.DeserializeObject<List<FoodBank>>(content);
+                    foreach (FoodBank Foodbankf in currState.FoodBankList)
+                    {
+
+                    }
+                }
+                else
+                {
+                    var content = await Task.FromResult<List<FoodBank>>(null);
+                    this.currState.spoofFoodBankList();
                 }
             }
-            else
+            catch(Exception e)
             {
-                var content = await Task.FromResult<List<FoodBank>>(null);
-                this.currState.spoofFoodBankList();
+
             }
-            return;
         }
 
         public async Task getFoodBanks()
         {
             HttpClient client = new HttpClient();
-            string RestUrl = "http://hfcrest.azurewebsites.net/api/Foodbanks";
+            string RestUrl = "http://hfcserver.azurewebsites.net/api/FoodBanks/";
             var uri = new Uri(RestUrl);
-
-            HttpResponseMessage response = await client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                this.currState.FoodBankList = JsonConvert.DeserializeObject<List<FoodBank>>(content);
-                RestUrl = "http://hfcrest.azurewebsites.net/api/FoodBanks/GetNeeds/{0}";
-                for(int i = 0; i < currState.FoodBankList.Count; i++)
+                HttpResponseMessage response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-                    uri = new Uri(string.Format(RestUrl, currState.FoodBankList[i].FoodBankID));
-                    response = await client.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    var content = await response.Content.ReadAsStringAsync();
+                    this.currState.FoodBankList = JsonConvert.DeserializeObject<List<FoodBank>>(content);
+                    RestUrl = "http://hfcserver.azurewebsites.net/api/FoodBanks/getneeds/{0}";
+                    for (int i = 0; i < currState.FoodBankList.Count; i++)
                     {
-                        content = await response.Content.ReadAsStringAsync();
-                        this.currState.FoodBankList[i].NeedsList = deSerializeNeeds(content);
+                        uri = new Uri(string.Format(RestUrl, currState.FoodBankList[i].FoodBankID));
+                        response = await client.GetAsync(uri);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            content = await response.Content.ReadAsStringAsync();
+                            this.currState.FoodBankList[i].NeedsList = deSerializeNeeds(content);
+                        }
+
                     }
-                    
+                }
+                else
+                {
+                    var content = await Task.FromResult<List<FoodBank>>(null);
+                    this.currState.spoofFoodBankList();
                 }
             }
-            else
+            catch(Exception e)
             {
-                var content = await Task.FromResult<List<FoodBank>>(null);
-                this.currState.spoofFoodBankList();
+
             }
-            return;
         }
+
          public static List<Need> deSerializeNeeds(string content)
         {
             var temp = content.Split(new Char[] { '}' });
-            Regex jsondeserial = new Regex("(\\[?\\,?{\"NeedID\":\"(?<needid>[A-Za-z0-9:;,.//(//)\\s]*)\",\"Name\":\"(?<name>[A-Za-z0-9\\s]*)\",\"Unit\":\"(?<unit>[A-Za-z0-9\\s]*)\")");
+            Regex jsondeserial = new Regex("(\\[?\\,?{\"NeedID\":\"(?<needid>[A-Za-z0-9\\-:;,.\\(\\)\\s]*)\",\"Name\":\"(?<name>[A-Za-z0-9\\-:;,.\\(\\)\\s]*)\",\"Unit\":\"(?<unit>[A-Za-z0-9\\-:;,.\\(\\)\\s]*)\")");
             Match groups;
             Need tempNeed = new Need();
             List<Need> tempList = new List<Need>();

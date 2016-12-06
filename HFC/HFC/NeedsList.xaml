@@ -12,7 +12,8 @@
           <StackLayout Orientation="Horizontal">
             <Button Text="Donate" TextColor="Black"
                     VerticalOptions="Center"
-                    HorizontalOptions="Start"/>
+                    HorizontalOptions="Start"
+                    IsVisible="False"/>
             <StackLayout Orientation="Vertical">
               <Label Text="{Binding Name}"
                      VerticalOptions="Center"
@@ -38,17 +39,17 @@
              HorizontalOptions="CenterAndExpand"
              VerticalOptions="Start"/>
       <ListView x:Name="firstList"
-                VerticalOptions="StartAndExpand"
+                VerticalOptions="Start"
                 RowHeight="60"
                 BackgroundColor="White"
                 ItemTemplate="{StaticResource listTemplate}"/>
       <Label x:Name="ListTitle2"
              TextColor="Black"
              FontSize="Large"
-             HorizontalOptions="Start"
-             VerticalOptions="Start"/>
+             HorizontalOptions="CenterAndExpand"
+             VerticalOptions="Center"/>
       <ListView x:Name="secondList"
-                VerticalOptions="StartAndExpand"
+                VerticalOptions="Start"
                 RowHeight="60"
                 BackgroundColor="White"
                 ItemTemplate="{StaticResource listTemplate}"/>

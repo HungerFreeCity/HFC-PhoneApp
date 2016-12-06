@@ -8,12 +8,12 @@
     <StackLayout>
       <Label Text="Hunger Free City"
              TextColor="White"
-             VerticalOptions="Start"
-             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             HorizontalOptions="CenterAndExpand"
              FontSize="45"
              FontAttributes="Bold"/>
       <Image Source="icon.png"
-             VerticalOptions="CenterAndExpand"
+             VerticalOptions="Center"
              HorizontalOptions="Center"/>
       <Button Text="Login with Google"
               VerticalOptions="Start"
@@ -21,7 +21,7 @@
               IsVisible="False"/>
       <Button x:Name="contworeg"
               Text="Continue Without Login"
-              VerticalOptions="Start"
+              VerticalOptions="CenterAndExpand"
               HorizontalOptions="CenterAndExpand"/>
     </StackLayout>
   </ContentPage.Content>

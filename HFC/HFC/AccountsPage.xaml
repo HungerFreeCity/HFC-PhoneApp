@@ -12,7 +12,6 @@
              VerticalOptions="Center"
              Text="Email Address"
              TextColor="Black"
-             FontAttributes="Bold"
              FontSize="Large"/>
       <Label x:Name="EmailLabel"
              HorizontalTextAlignment="Start"
@@ -28,7 +27,6 @@
              VerticalOptions="Center"
              Text ="Favorite FoodBank"
              TextColor="Black"
-             FontAttributes="Bold"
              FontSize="Large"/>
       <Label x:Name="FoodbankNameLabel"
              HorizontalTextAlignment="Start"

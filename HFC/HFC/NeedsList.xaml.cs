@@ -16,10 +16,10 @@ namespace HFC
         {
             InitializeComponent();
 
-            if (curr.FoodBankList.Count != 0)
+            if (curr.FoodBankList.Count > 0)
             {
-                FirstFoodBank = curr.FoodBankList[0];
-                SecondFoodBank = curr.FoodBankList[1];
+                FirstFoodBank = curr.FoodBankList[1];
+                SecondFoodBank = curr.FoodBankList[0];
                 var temp = FirstFoodBank.NeedsList[0].Name;
                 temp = FirstFoodBank.NeedsList[0].Unit;
                 temp = FirstFoodBank.NeedsList[0].NeedID;
